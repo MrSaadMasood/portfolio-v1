@@ -1,4 +1,5 @@
 import { GoArrowUpRight } from "react-icons/go";
+import { v4 as uuid } from "uuid"
 
 export default function Contact() {
   const contactLinks = [
@@ -12,11 +13,15 @@ export default function Contact() {
     }
   ]
   return (
-    <section className="absolute bottom-8 flex flex-col justify-end  left-4 h-72 w-44">
+    <section className="absolute bottom-8 md:bottom-1/2 md:left-2/3
+      left-4  flex flex-col justify-end  
+       h-72 w-44">
       <ul className="text-xs font-bold">
-        {contactLinks.map((contact, index) => {
+        {contactLinks.map((contact) => {
           return (
-            <li className="mb-1 flex w-full" key={index}>
+            <li className="mb-1 flex w-full md:text-sm lg:text-base neue-reg
+              font-bold hover:dark:text-[#737373]
+              dark:text-black duration-300" key={uuid()}>
               <a target="_blank" href={contact.link}>{contact.content}</a>
               <div>
                 <GoArrowUpRight />

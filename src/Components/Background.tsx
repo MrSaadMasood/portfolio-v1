@@ -1,40 +1,46 @@
 'use client'
 
-import React, { useEffect, useRef, useState } from "react";
+import { AnimatePresence } from "framer-motion";
+import React, { useEffect, useState } from "react";
+import { useTheme } from "next-themes"
+import Introduction from "./Introduction";
+import ThemeControl from "./ThemeControl";
+import MouseTracker from "./MouseTracker";
 
 export default function Background({ children }: { children: React.ReactNode }) {
-  const backgroundDivElement = useRef<HTMLDivElement>(null)
-  const [coordinates, setCoordintes] = useState({ x: 0, y: 0 })
+  const [isBrowserEnv, setIsBrowserEnv] = useState(false)
+  const { setTheme, resolvedTheme } = useTheme()
+  const [isIntroductionShown, setIsIntroductionShown] = useState(true)
 
   useEffect(() => {
-    const backGroundDiv = backgroundDivElement.current
-    if (!backGroundDiv) return
+    const timer = setTimeout(() => {
+      setIsIntroductionShown(false)
+    }, 1500);
+    return () => clearTimeout(timer)
+  }, [])
 
-    const mouseTracker = (e: MouseEvent) => {
-      console.log("The x ", e.pageX, "the y ", e.pageY)
-      setCoordintes(() => ({
-        x: e.pageX,
-        y: e.pageY
-      }))
-    }
 
-    backGroundDiv.addEventListener("mousemove", mouseTracker)
-    return () => backGroundDiv.removeEventListener("mousemove", mouseTracker)
+  useEffect(() => {
+    setIsBrowserEnv(true)
+  }, [])
 
-  }, [backgroundDivElement])
+  if (isIntroductionShown) {
+    return (
+      <Introduction />
+    )
+  }
   return (
-    <div ref={backgroundDivElement}
-      className="h-[100%]  w-screen px-6 py-6 border-[1px] border-[#4c4c4c] text-white relative
-        overflow-hidden">
-      <div style={{
-        top: `${coordinates.y - 30}px`,
-        left: `${coordinates.x - 25}px`
-      }} className={` text-white absolute 
-            h-[44rem] w-[44rem] center circle
-          rounded-full  `}>
-      </div>
-      {children}
-    </div>
+    <main className="bg-black dark:bg-[#e6e6e6] text-white duration-200 ease-in
+    dark:text-black
+    flex justify-center items-center h-screen w-screen  px-5 py-5 sm:px-6 sm:py-6">
+      <AnimatePresence mode="popLayout" initial={true}>
+        <>
+          <ThemeControl setTheme={setTheme} resolvedTheme={resolvedTheme} isBrowserEnv={isBrowserEnv} />
+          <MouseTracker>{children}</MouseTracker>
+        </>
+
+      </AnimatePresence>
+    </main>
   )
 }
 

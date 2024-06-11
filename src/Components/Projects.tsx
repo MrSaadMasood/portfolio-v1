@@ -1,20 +1,40 @@
-export default async function Projects() {
+import { clsx } from "clsx"
+
+type Project = {
+  [key: string]: string,
+}
+
+export default async function Projects({ isMonospaced }: {
+  isMonospaced: boolean
+}) {
+  const data = await fetch("http:localhost:3000/api/projects", { next: { revalidate: 60 } })
+  if (!data.ok) throw new Error
+  const projects: Project[] = await data.json()
+
   return (
-    <ul className="absolute top-0 right-3  h-[100%] w-[90%] md:w-[90%] md:right-8 pt-32 md:pt-52 pb-20
+    <ul className="absolute top-0 right-3  h-[100%] w-[90%] sm:w-auto  md:w-auto
+      md:max-w-[90%] md:right-8 pt-32 md:pt-52 pb-20
       overflow-hidden overflow-y-scroll noScroll">
-      {Array(40).fill(0).map((item, index) => {
+      {projects.map((project) => {
+        const date = new Date(project.time)
+
         return (
-          <li key={index} className=" cursor-pointer mb-2
-            text-white  h-[10%] md:h-[6rem]  text-right ">
-            <a className="duration-700 hover:text-[#646464]">
-              <p className="  text-[#cecece] text-4xl sm:text-6xl h-[75%] md:h-[4rem] 
-                duration-700 hover:text-[#646464] text-wrap
-              flex justify-end items-end  ">
-                haleeluuy project
+          <li key={project._id} className=" cursor-pointer mb-2 
+              h-auto md:h-[6rem]  text-right  ">
+            <a href={project.link} target="_blank"
+              className="duration-500 dark:text-black 
+              hover:dark:text-[#737373] hover:text-[#646464]">
+              <p className={clsx(`  text-[#cecece] dark:text-black text-3xl sm:text-5xl h-[75%] md:h-[4rem] 
+                duration-500 hover:text-[#646464] hover:dark:text-[#737373]  text-wrap tracking-wider
+              flex justify-end items-end`, isMonospaced && "neue-mono tracking-tighter")}>
+                {project.name}
               </p>
-              <p className="font-bold text-xs  flex justify-end h-[25%]
-                 md:h-[1.5rem] items-end text-wrap">
-                Feb.2021/ Commission / Portfolio
+              <p className={clsx(`font-bold text-xs flex justify-end h-[25%] 
+                md:h-[1.5rem] items-end text-wrap`, isMonospaced ? "neue-mono" : "neue-reg")} >
+                {`${date.toLocaleString("default", {
+                  month: "short",
+                  year: "numeric"
+                })}`}/ {project.general_category} / {project.sub_category}
               </p>
             </a>
 

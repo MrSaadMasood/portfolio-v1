@@ -1,9 +1,22 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 import PortfolioLayout from "@/Components/PortfolioLayout";
+import ThemeProviderNext from "@/Components/ThemeProvider";
+import local from "next/font/local"
 
-const inter = Inter({ subsets: ["latin"] });
+const neueFont = local({
+  src: "./NeueMontreal-Light.otf",
+  variable: "--font-neue"
+})
+const neueFontRegular = local({
+  src: "./PPNeueMontreal-Book.otf",
+  variable: "--font-neue-regular"
+})
+
+const neueMono = local({
+  src: "./PPNeueMontrealMono-Thin.otf",
+  variable: "--font-neue-mono"
+})
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,11 +29,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <PortfolioLayout>
-          {children}
-        </PortfolioLayout>
+    <html lang="en" suppressHydrationWarning>
+      <body className={`
+         ${neueFont.className} 
+         ${neueFontRegular.variable}
+         ${neueMono.variable} antialiased`}>
+        <ThemeProviderNext >
+          <PortfolioLayout>
+            {children}
+          </PortfolioLayout>
+        </ThemeProviderNext>
       </body>
     </html>
   );
