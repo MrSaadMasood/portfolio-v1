@@ -22,7 +22,7 @@ export default function Contact({ isMonoSpaced }: { isMonoSpaced: boolean }) {
           return (
             <li className={clsx(`mb-1 flex w-full md:text-sm lg:text-base neue-reg
               font-bold hover:dark:text-[#737373]
-              dark:text-black duration-300 `, isMonoSpaced ? "neue-mono font-bold"
+              dark:text-black duration-300 `, isMonoSpaced ? "neue-mono font-extrabold"
               : "neue-reg font-bold")} key={uuid()}>
               <a target="_blank" href={contact.link}>{contact.content}</a>
               <div>
