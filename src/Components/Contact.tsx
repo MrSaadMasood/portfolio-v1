@@ -1,7 +1,8 @@
 import { GoArrowUpRight } from "react-icons/go";
 import { v4 as uuid } from "uuid"
+import { clsx } from "clsx"
 
-export default function Contact() {
+export default function Contact({ isMonoSpaced }: { isMonoSpaced: boolean }) {
   const contactLinks = [
     {
       content: "Github",
@@ -13,15 +14,16 @@ export default function Contact() {
     }
   ]
   return (
-    <section className="absolute bottom-8 md:bottom-1/2 md:left-2/3
-      left-4  flex flex-col justify-end  
-       h-72 w-44">
+    <section className={clsx(`absolute bottom-8 md:bottom-1/2 md:left-2/3
+      left-4  flex flex-col justify-end 
+       h-72 w-44`)}>
       <ul className="text-xs font-bold">
         {contactLinks.map((contact) => {
           return (
-            <li className="mb-1 flex w-full md:text-sm lg:text-base neue-reg
+            <li className={clsx(`mb-1 flex w-full md:text-sm lg:text-base neue-reg
               font-bold hover:dark:text-[#737373]
-              dark:text-black duration-300" key={uuid()}>
+              dark:text-black duration-300 `, isMonoSpaced ? "neue-mono font-bold"
+              : "neue-reg font-bold")} key={uuid()}>
               <a target="_blank" href={contact.link}>{contact.content}</a>
               <div>
                 <GoArrowUpRight />
