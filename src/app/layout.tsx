@@ -33,7 +33,7 @@ export default function RootLayout({
       <body className={`
          ${neueFont.className} 
          ${neueFontRegular.variable}
-         ${neueMono.variable} antialiased`}>
+         ${neueMono.variable} antialiased  `}>
         <ThemeProviderNext >
           <PortfolioLayout>
             {children}

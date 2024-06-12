@@ -7,7 +7,7 @@ type Project = {
 export default async function Projects({ isMonospaced }: {
   isMonospaced: boolean
 }) {
-  const data = await fetch("http:localhost:3000/api/projects", { next: { revalidate: 60 } })
+  const data = await fetch(`${process.env.BASE_URL}/api/projects`, { next: { revalidate: 60 } })
   if (!data.ok) throw new Error
   const projects: Project[] = await data.json()
 
@@ -27,7 +27,7 @@ export default async function Projects({ isMonospaced }: {
               <p className={clsx(`  text-[#cecece] dark:text-black text-3xl sm:text-5xl h-[75%] md:h-[4rem] 
                 duration-500 hover:text-[#646464] hover:dark:text-[#737373]  text-wrap tracking-wider
               flex justify-end items-end`, isMonospaced && "neue-mono tracking-tighter")}>
-                {project.name}
+                {project.name.toUpperCase()}
               </p>
               <p className={clsx(`font-bold text-xs flex justify-end h-[25%] 
                 md:h-[1.5rem] items-end text-wrap`, isMonospaced ? "neue-mono" : "neue-reg")} >
