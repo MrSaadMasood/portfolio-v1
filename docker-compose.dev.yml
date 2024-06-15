@@ -1,0 +1,12 @@
+services:
+  dev-portf:
+    build:
+      context: .
+      dockerfile: ./dev.Dockerfile
+    container_name: portfolio-dev
+    ports:
+      - 3000:3000
+    volumes:
+      - ./:/app
+    env_file:
+      - .env.local
