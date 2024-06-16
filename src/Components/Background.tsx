@@ -15,7 +15,7 @@ export default function Background({ children }: { children: React.ReactNode }) 
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsIntroductionShown(false)
-    }, 1500);
+    }, 2000);
     return () => clearTimeout(timer)
   }, [])
 
