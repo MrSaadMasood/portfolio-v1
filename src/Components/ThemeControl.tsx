@@ -92,7 +92,7 @@ export default function ThemeControl(
               "duration-200"
             )} />
         <label htmlFor="font" id="font" className={chageFontToMono()}
-        >Monospaced
+        >MONOSPACED
         </label>
       </div>
     </motion.div >
