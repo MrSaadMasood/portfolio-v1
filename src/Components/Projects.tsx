@@ -8,10 +8,8 @@ export const dynamic = "force-dynamic"
 export default async function Projects({ isMonospaced }: {
   isMonospaced: boolean
 }) {
-  const data = await fetch(`${process.env.BASE_URL}/api/projects`, { cache: "no-store" })
-  if (!data.ok) throw new Error
-  const projects: Project[] = await data.json()
-
+  const db = await dbConnect()
+  const projects : Project[] = await db.collection("data").find().sort({ time: -1 }).toArray()
   return (
     <ul className="absolute top-0 right-3  h-[100%] w-[90%] sm:w-auto  md:w-auto
       md:max-w-[90%] md:right-8 pt-32 md:pt-52 pb-20
