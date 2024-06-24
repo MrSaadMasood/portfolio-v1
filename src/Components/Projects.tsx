@@ -7,7 +7,7 @@ type Project = {
 export default async function Projects({ isMonospaced }: {
   isMonospaced: boolean
 }) {
-  const data = await fetch(`${process.env.BASE_URL}/api/projects`, { next: { revalidate: 60 } })
+  const data = await fetch(`${process.env.BASE_URL}/api/projects`, { cache: "no-store" })
   if (!data.ok) throw new Error
   const projects: Project[] = await data.json()
 
