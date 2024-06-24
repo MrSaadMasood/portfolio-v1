@@ -1,3 +1,4 @@
+import { dbConnect } from "@/lib/connection"
 import { clsx } from "clsx"
 
 type Project = {
@@ -9,7 +10,7 @@ export default async function Projects({ isMonospaced }: {
   isMonospaced: boolean
 }) {
   const db = await dbConnect()
-  const projects : Project[] = await db.collection("data").find().sort({ time: -1 }).toArray()
+  const projects: Project[] = await db.collection("data").find().sort({ time: -1 }).toArray()
   return (
     <ul className="absolute top-0 right-3  h-[100%] w-[90%] sm:w-auto  md:w-auto
       md:max-w-[90%] md:right-8 pt-32 md:pt-52 pb-20
