@@ -1,7 +1,6 @@
 import { MongoClient } from "mongodb"
 
 const { MONGO_URL } = process.env
-console.log("The env variables are", MONGO_URL)
 if (!MONGO_URL) throw new Error("the database connection string is not available")
 let clientPromise: Promise<MongoClient>
 
