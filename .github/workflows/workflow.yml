@@ -1,0 +1,24 @@
+name: build worflow
+
+on:
+  push:
+    branches:
+      - main
+      - feature/**
+
+jobs:
+  build_pipeline:
+    runs-on: ["ubuntu-latest", "windows-latest"]
+    environment: deployment
+    defaults:
+      run:
+        working-directory: ./
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+      - name: installing dependencies
+        run: npm ci
+      - name: adding .env
+        run: echo ${{ github.SECRETS }} > .env
+      - name: build step
+        run: npm run build
