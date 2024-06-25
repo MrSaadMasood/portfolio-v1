@@ -10,7 +10,7 @@ jobs:
   build_pipeline:
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest]
+        os: [ubuntu-latest]
     name: build job
     runs-on: ${{ matrix.os }}
     environment: deployment
@@ -23,7 +23,7 @@ jobs:
       - name: installing dependencies
         run: npm ci
       - name: adding .env.local file
-        run: echo "${{ secrets.SECRETS }}" > .env.local
+        run: echo ${{ secrets.SECRETS }} > .env.local && cat .env.local
       - name: build step
         env:
           MONGO_URL: ${{ secrets.MONGO_URL}}
