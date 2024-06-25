@@ -20,13 +20,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
+        with:
+          node_version: 20
       - name: installing dependencies
         run: npm ci
       - name: adding .env.local file
         run: echo ${{ secrets.SECRETS }} > .env.local && cat .env.local
       - name: build step
-        env:
-          MONGO_URL: ${{ secrets.MONGO_URL}}
+        # env:
+        #   MONGO_URL: ${{ secrets.MONGO_URL}}
         run: |
           ls -la
           cat .env.local
