@@ -8,8 +8,11 @@ on:
 
 jobs:
   build_pipeline:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
     name: build job
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     environment: deployment
     defaults:
       run:
