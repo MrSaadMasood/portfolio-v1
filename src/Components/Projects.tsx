@@ -1,5 +1,7 @@
 import { dbConnect } from "@/lib/connection"
 import { clsx } from "clsx"
+import ProjectTemplate from "./ProjectTemplate"
+import Link from "next/link"
 
 type Project = {
   [key: string]: string,
