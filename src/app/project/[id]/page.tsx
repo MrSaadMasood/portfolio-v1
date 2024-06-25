@@ -4,6 +4,7 @@ import { dbConnect } from "@/lib/connection";
 import { clsx } from "clsx";
 import { randomUUID } from "crypto";
 import { ObjectId } from "mongodb";
+import ProjectListFramerTemplate from "@/Components/ProjectListFramerTemplate";
 
 export default async function ProjectDetail({ params, searchParams }: {
   params: { id: string },
@@ -15,8 +16,7 @@ export default async function ProjectDetail({ params, searchParams }: {
   const isMonospaced = !!searchParams.monospaced
   return (
     <ProjectTemplate>
-      <li key={project._id} className=" cursor-pointer mb-2 
-              h-auto md:h-[6rem]  text-right  ">
+      < ProjectListFramerTemplate>
         <div
           className="duration-500 dark:text-black  space-y-2">
           <a href={project.link} target="_blank" className={clsx(`  text-[#cecece] 
@@ -33,16 +33,21 @@ export default async function ProjectDetail({ params, searchParams }: {
                 {project.description[key].map(feature => (
                   <li key={randomUUID()} className={clsx(`  flex justify-end h-[25%] 
                 md:h-[1.5rem] sm:text-2xl text-lg items-end text-wrap`, isMonospaced && "neue-mono")}>
-                    {feature}
+                    {key.toLowerCase() === "github" ?
+                      <a href={feature} target="_blank"
+                        className={clsx("flex text-xl justify-center"
+                          , isMonospaced && "text-base")}>
+                        {<GoArrowUpRight />}{feature}
+                      </a> :
+                      feature
+                    }
                   </li>
                 ))}
               </ul>
             </div>
           ))}
         </div>
-
-      </li>
-
+      </ProjectListFramerTemplate>
     </ProjectTemplate>
   )
 }
