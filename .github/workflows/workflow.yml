@@ -8,6 +8,7 @@ on:
 
 jobs:
   build_pipeline:
+    name: build job
     runs-on: [ubuntu-latest, windows-latest]
     environment: deployment
     defaults:
