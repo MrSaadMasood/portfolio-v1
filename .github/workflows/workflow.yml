@@ -19,6 +19,6 @@ jobs:
       - name: installing dependencies
         run: npm ci
       - name: adding .env
-        run: echo ${{ github.SECRETS }} > .env
+        run: echo "${{ secrets.SECRETS }}" > .env
       - name: build step
         run: npm run build
