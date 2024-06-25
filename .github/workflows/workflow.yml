@@ -22,12 +22,9 @@ jobs:
       - uses: actions/setup-node@v4
       - name: installing dependencies
         run: npm ci
-      - run: echo "${{ secrets.SECRETS }}"
-      - name: adding .env
+      - name: adding .env.local file
         run: echo "${{ secrets.SECRETS }}" > .env.local
       - name: build step
-        env:
-          CI: true
         run: |
-          ls -a
+          cat .env.local
           npm run build
