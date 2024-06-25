@@ -28,4 +28,6 @@ jobs:
         run: echo "${{ secrets.SECRETS }}" >> .env.local
       - name: build step
         run: |
+          ls -la
+          cat .env.local
           npm run build
