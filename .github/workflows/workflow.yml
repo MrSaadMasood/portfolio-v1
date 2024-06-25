@@ -25,7 +25,7 @@ jobs:
       - name: installing dependencies
         run: npm ci
       - name: adding .env.local file
-        run: echo "${{ secrets.SECRETS }}" >> .env.local && echo "${{secrets.SECRETS}}"
+        run: echo "${{ secrets.ENV_LOCAL }}" > .env.local
       - name: build step
         run: |
           ls -la
