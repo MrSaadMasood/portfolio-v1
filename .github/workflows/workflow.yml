@@ -24,7 +24,7 @@ jobs:
         run: npm ci
       - run: echo "${{ secrets.SECRETS }}"
       - name: adding .env
-        run: echo "${{ secrets.SECRETS }}" > .env
+        run: echo "${{ secrets.SECRETS }}" > .env.local
       - name: build step
         run: |
           ls -a
