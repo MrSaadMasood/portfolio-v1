@@ -25,11 +25,7 @@ jobs:
       - name: installing dependencies
         run: npm ci
       - name: adding .env.local file
-        run: echo "${{ secrets.DEPLOYMENT_SECRETS }}" >> .env.local
+        run: echo "${{ secrets.SECRETS }}" >> .env.local
       - name: build step
-        # env:
-        #   MONGO_URL: ${{ secrets.MONGO_URL}}
         run: |
-          ls -la
-          cat .env.local
           npm run build
