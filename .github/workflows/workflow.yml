@@ -24,10 +24,9 @@ jobs:
           node_version: 20
       - name: installing dependencies
         run: npm ci
-      - name: adding .env.local file
-        run: echo "${{ secrets.ENV_LOCAL }}" > .env.local
       - name: build step
         run: |
+          echo "${{ secrets.ENV_LOCAL}} > .env.local
           ls -la
           cat .env.local
           npm run build
