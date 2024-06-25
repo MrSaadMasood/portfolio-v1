@@ -27,5 +27,5 @@ jobs:
         run: echo "${{ secrets.SECRETS }}" > .env
       - name: build step
         run: |
-          ls -l
+          ls -a
           npm run build
