@@ -26,4 +26,6 @@ jobs:
       - name: adding .env
         run: echo "${{ secrets.SECRETS }}" > .env
       - name: build step
-        run: npm run build
+        run: |
+          ls -l
+          npm run build
