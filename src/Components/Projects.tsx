@@ -12,16 +12,14 @@ export default async function Projects({ isMonospaced }: {
   const db = await dbConnect()
   const projects: Project[] = await db.collection("data").find().sort({ time: -1 }).toArray()
   return (
-    <ul className="absolute top-0 right-3  h-[100%] w-[90%] sm:w-auto  md:w-auto
-      md:max-w-[90%] md:right-8 pt-32 md:pt-52 pb-20
-      overflow-hidden overflow-y-scroll noScroll">
+    <ProjectTemplate>
       {projects.map((project) => {
         const date = new Date(project.time)
 
         return (
           <li key={project._id} className=" cursor-pointer mb-2 
               h-auto md:h-[6rem]  text-right  ">
-            <a href={project.link} target="_blank"
+            <Link href={`/project/${project._id}`}
               className="duration-500 dark:text-black 
               hover:dark:text-[#737373] hover:text-[#646464]">
               <p className={clsx(`  text-[#cecece] dark:text-black text-3xl sm:text-5xl h-[75%] md:h-[4rem] 
@@ -36,11 +34,11 @@ export default async function Projects({ isMonospaced }: {
                   year: "numeric"
                 })}`}/ {project.general_category} / {project.sub_category}
               </p>
-            </a>
+            </Link>
 
           </li>
         )
       })}
-    </ul >
+    </ProjectTemplate>
   )
 }
