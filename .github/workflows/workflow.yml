@@ -8,6 +8,8 @@ on:
 
 jobs:
   build_pipeline:
+    env:
+      ENV_SECRETS: ${{ secrets.ENV_LOCAL}}
     strategy:
       matrix:
         os: [ubuntu-latest]
@@ -26,6 +28,6 @@ jobs:
         run: npm ci
       - name: build step
         run: |
-          echo "${{ secrets.ENV_LOCAL}}" > .env.local
+          echo "$ENV_SECRETS" >> .env.local
           ls -la
           npm run build
