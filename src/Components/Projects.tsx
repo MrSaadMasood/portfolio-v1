@@ -13,7 +13,6 @@ export default async function Projects({ isMonospaced }: {
     <ProjectTemplate>
       {projects.map((project) => {
         const date = new Date(project.time)
-
         return (
           <li key={project._id} className=" cursor-pointer mb-2 
               h-auto md:h-[6rem]  text-right  ">
