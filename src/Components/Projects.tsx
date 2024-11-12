@@ -20,7 +20,7 @@ export default async function Projects({ isMonospaced }: {
         return (
           <li key={project._id} className=" cursor-pointer mb-2 
               h-auto md:h-[6rem]  text-right  ">
-            <Link href={`/project/${project._id}`}
+            <Link href={`/project/${project._id}?monospaced=${isMonospaced}`}
               className="duration-500 dark:text-black 
               hover:dark:text-[#737373] hover:text-[#646464]">
               <p className={clsx(`  text-[#cecece] dark:text-black text-3xl sm:text-5xl h-[75%] md:h-[4rem] 
